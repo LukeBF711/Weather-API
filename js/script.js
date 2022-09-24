@@ -2,6 +2,9 @@ const main = () => {
 
       const list = document.querySelector("#location")
       const result = document.querySelector("#container-result");
+      const resultItems = document.querySelector("#container-result").children;
+      console.log(resultItems)
+      const innerDiv = document.querySelector("#container-result > div");
 
       list.addEventListener("change",()=>{
             // console.log(list.value);
@@ -15,12 +18,17 @@ const main = () => {
 
             })
             .then((json)=>{
-                  result.innerHTML = 
-                  `<div>The current temperature in ${list.value} is ${json.current.temp_c}
-                  <img src="${json.current.condition.icon}" alt="">
-                  </div>`
                   
-                  // console.log(json.current.temp_c)
+                  result.innerHTML = 
+                  `<h2>${list.value}, ${json.location.country}</h2
+                  <div>
+                        <div class="degrees">
+                        ${json.current.temp_c}&#176
+                        </div>
+                        <img src="${json.current.condition.icon}" alt="">
+                  </div>
+                 `
+
             })
             .catch((err)=>{
                   // called if the fetch was not successful
